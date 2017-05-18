@@ -5,8 +5,9 @@ from django.forms.widgets import Textarea
 class CustomerForm(forms.ModelForm):
     class Meta:
         model=models.Customer
-        fields=('doc_type','doc_num','email',
-                'first_name','last_name')
+        fields=['doc_type','doc_num','email',
+                'first_name','last_name']
+
 class ClaimForm(forms.ModelForm):
     class Meta:
         model= models.Claim

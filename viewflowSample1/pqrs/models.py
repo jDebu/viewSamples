@@ -8,8 +8,8 @@ from viewflow.models import Process
 # Create your models here.
 class Customer(models.Model):
     doc_type= models.CharField(_('tipo documento'),choices=(
-        (1,'CODIGO'),
-        (2,'DNI')
+        ('1','CODIGO'),
+        ('2','DNI')
     ),max_length=1)
     doc_num= models.CharField(_('n° documento'),max_length=20,unique=True)
     email = models.EmailField(_('correo'),max_length=50 ,blank=True)
@@ -31,16 +31,16 @@ class Customer(models.Model):
 
 class Claim(models.Model):
     customer=models.ForeignKey(Customer)
-    reception_mean=models.CharField(_('medio'),choices=(
+    reception_mean=models.IntegerField(_('medio'),choices=(
         (1,'Telefono'),
         (2,'correo')
-    ),max_length=1)
-    type=models.CharField(_('tipo'),choices=(
+    ))
+    type=models.IntegerField(_('tipo'),choices=(
         (1,'Peticion'),
         (2,'Quejas'),
         (3,'Reclamos'),
         (4,'Sugerencias')
-    ),max_length=1)
+    ))
     cause=models.CharField(_('causa'),max_length=100)
     description=models.CharField(_('descripcion'),max_length=200,blank=True)
     #case_field=models.ImageField(_('archivo'),upload_to=user_directory_path,null=True,blank=True)
@@ -53,13 +53,13 @@ class Claim(models.Model):
     taken_by = models.ForeignKey(User)
 
 class ClaimProcess(Process):
-    claims=models.ForeignKey(Claim)
+    claim=models.ForeignKey(Claim)
 
     @property
     def pqr_required(self):
-        return (self.claims.claims.type == 1 or
-                self.claims.claims.type == 2 or
-                self.claims.claims.type == 3)
+        return (self.claim.claim.type == 1 or
+                self.claim.claim.type == 2 or
+                self.claim.claim.type == 3)
     @property
     def s_required(self):
-        return self.claims.claims.type == 4
+        return self.claim.claim.type == 4

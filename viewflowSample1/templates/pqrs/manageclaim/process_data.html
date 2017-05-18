@@ -1,0 +1,12 @@
+<div class="input-field">
+  <i class="material-icons prefix">perm_identity</i>
+  <input type="text" readonly value="{{ process.claim.customer.get_full_name }}">
+  <label class="active">Cliente</label>
+</div>
+<div class="input-field">
+  <i class="material-icons prefix">work</i>
+  <textarea class="materialize-textarea" readonly>{{ process.claim.get_type_display }}</textarea>
+  <label class="active">Gestion</label>
+</div>
+
+
