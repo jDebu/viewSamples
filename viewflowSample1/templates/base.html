@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Viewflow - Reusable Workflow Library</title>
+    <link href="{% static 'custom.css' %}" rel="stylesheet">
+    {% include 'material/includes/material_css.html' %}
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <ul>
+          <li {% block nav_home_cls%}{% endblock %}>
+            <a href="/"><i class="material-icons">home</i></a>
+          </li>
+          {% if user.is_authenticated %}
+          {% endif %}
+        </ul>
+        <ul class="right">
+            <li {% block nav_login_cls%}{% endblock %}>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+    {% include 'material/includes/material_js.html' %}
+  </body>
+</html>
