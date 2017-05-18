@@ -1,0 +1,7 @@
+nfo
+*.pot
+*.py[co]
+.tox/
+/*/__pycache__/*
+MANIFEST
+/*/.idea/*
